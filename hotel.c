@@ -48,10 +48,12 @@ void book_room()
 {
     int roomnum;
     printf("Enter room number to book (1-50): ");
-    if (scanf("%d", &roomnum) != 1) {
+    scanf("%d",&roomnum);
+    if(roomnum!=1) 
+    {
         printf("Invalid input!\n");
     }
-    if (roomnum<1 || roomnum>50 || hotel[roomnum-1].check) 
+    if (roomnum<1 || roomnum>50) 
     {
         printf("Room is not available or invalid room number!\n");
         check_available_rooms();
@@ -110,7 +112,7 @@ void room_details()
     int roomnum;
     printf("Enter room number to view details (1-50): ");
     scanf("%d", &roomnum);
-    if(roomnum < 1 || roomnum > 50)
+    if(roomnum<1 || roomnum>50)
     {
         printf("Invalid input! Please enter a valid room number.\n");
     }
