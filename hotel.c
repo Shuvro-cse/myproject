@@ -2,127 +2,133 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct {
-    int roomNumber;
-    char customerName[50];
+typedef struct
+{
+    int roomnumber;
+    char customer_name[50];
     int age;
     int mobile_number;
     char address[100];
     int check;
-} Room;
+} room;
 
-Room hotel[50];
+room hotel[50];
 
-void initializeRooms() {
-    for (int i = 0; i < 50; i++) {
-        hotel[i].roomNumber = i + 1;
-        hotel[i].check = 0; 
+void set_rooms() 
+{
+    for (int i=0;i<50;i++) 
+    {
+        hotel[i].roomnumber= i+1;
+        hotel[i].check= 0; 
     }
 }
 
-void bookRoom() {
-    int roomNum;
+void book_room() 
+{
+    int roomnum;
     printf("Enter room number to book (1-50): ");
-    if (scanf("%d", &roomNum) != 1) {
+    if (scanf("%d", &roomnum) != 1) {
         printf("Invalid input!\n");
     }
-
-    if (roomNum<1 || roomNum>50 || hotel[roomNum-1].check) 
+    if (roomnum<1 || roomnum>50 || hotel[roomnum-1].check) 
     {
         printf("Room is not available or invalid room number!\n");
         return;
     }
     printf("Enter customer name: ");
-    scanf(" %[^\n]", hotel[roomNum-1].customerName);
+    scanf(" %[^\n]", hotel[roomnum-1].customer_name);
     printf("Age: ");
-    scanf("%d",&hotel[roomNum-1].age);
+    scanf("%d",&hotel[roomnum-1].age);
     printf("Mobile Number: ");
-    scanf("%d",&hotel[roomNum-1].mobile_number);
+    scanf("%d",&hotel[roomnum-1].mobile_number);
     printf("Address: ");
-    scanf(" %[^\n]",hotel[roomNum-1].address);
-    hotel[roomNum-1].check = 1;
-    printf("Room no. %d booked successfully!!\n", roomNum);
+    scanf(" %[^\n]",hotel[roomnum-1].address);
+    hotel[roomnum-1].check = 1;
+    printf("Room no. %d booked successfully!!\n", roomnum);
 }
 
-void checkAvailableRooms() {
+void check_available_rooms() 
+{
     int count= 0;
     printf("Available rooms: ");
-
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 50; i++) 
+    {
         if (hotel[i].check!=1) 
         {
-            printf("%d ", hotel[i].roomNumber);
-            count=1;
+            printf("%d ",hotel[i].roomnumber);
+            count= 1;
         }
     }
-
     if (count==0) 
     {
-        printf("No Room is Available!!");
+        printf("No Room is Available!");
     }
     printf("\n");
 }
 
-void checkoutRoom() {
-    int roomNum;
+void checkout_room()
+{
+    int roomnum;
     printf("Enter room number to checkout: ");
-    scanf("%d", &roomNum);
-
-    if (roomNum < 1 || roomNum > 50 || hotel[roomNum-1].check==0) {
+    scanf("%d", &roomnum);
+    if (roomnum < 1 || roomnum > 50 || hotel[roomnum-1].check==0) 
+    {
         printf("Invalid room number or room is not Booked yet!!\n");
         return;
     }
-
-    hotel[roomNum-1].check = 0;
-    printf("%s\n",hotel[roomNum-1].customerName);
-    printf("Room no. %d checked out successfully!\n", roomNum);
+    hotel[roomnum-1].check = 0;
+    printf("%s\n",hotel[roomnum-1].customer_name);
+    printf("Room no. %d checked out successfully!\n", roomnum);
 }
 
-void displayRooms() {
+void display_rooms()
+{
     printf("\nRoom Status:\n");
     for (int i = 0; i < 50; i++) 
     {
-        printf("Room: %d ", hotel[i].roomNumber);
+        printf("Room: %d ", hotel[i].roomnumber);
         if(hotel[i].check == 0)
         {
             printf("Status: Available.\n");
         }
         else
         {
-            printf("Status: Not Available! (Booked by '%s')\n",hotel[i].customerName);
+            printf("Status: Not Available! (Booked by '%s')\n",hotel[i].customer_name);
         }
     }
 }
 
-void RoomDetails() {
-    int roomNum;
+void room_details()
+{
+    int roomnum;
     printf("Enter room number to view details (1-50): ");
-    scanf("%d", &roomNum);
-    if(roomNum!= 1 || roomNum < 1 || roomNum > 50) 
+    scanf("%d", &roomnum);
+    if(roomnum!= 1 || roomnum < 1 || roomnum > 50) 
     {
         printf("Invalid input! Please enter a valid room number.\n");
     }
 
-    printf("\nRoom Details for Room no.%.2d :\n", hotel->roomNumber);
+    printf("\nRoom Details for Room no.%.2d:\n",hotel->roomnumber);
     if (hotel->check == 0) 
     {
-        printf("EMPTY!!\n");
+        printf("Status: EMPTY!!\n");
     } 
     else 
     {
         printf("Status: Booked\n");
-        printf("Customer Name: %s\n", hotel->customerName);
-        printf("Age: %d\n", hotel->age);
-        printf("Mobile Number: %d\n", hotel->mobile_number);
-        printf("Address: %s\n", hotel->address);
+        printf("Customer Name: %s\n",hotel->customer_name);
+        printf("Age: %d\n",hotel->age);
+        printf("Mobile Number: %d\n",hotel->mobile_number);
+        printf("Address: %s\n",hotel->address);
     }
 }
 
 int main()
 {
-    initializeRooms();
+    set_rooms();
     int choice;
-        do{
+    do
+    {
         printf("\nHotel Management System\n");
         printf("1. Book Room\n");
         printf("2. Check Available Rooms\n");
@@ -132,25 +138,23 @@ int main()
         printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&choice);
-
         switch (choice) 
         {
-            case 1: bookRoom(hotel); 
+            case 1: book_room(hotel); 
                     break;
-            case 2: checkAvailableRooms(hotel); 
+            case 2: check_available_rooms(hotel);
                     break;
-            case 3: checkoutRoom(); 
+            case 3: checkout_room(); 
                     break;
-            case 4: displayRooms(); 
+            case 4: display_rooms(); 
                     break;
-            case 5: RoomDetails();
+            case 5: room_details();
                     break;
             case 6: printf("Exiting...\n"); 
                     break;
-            default: printf("Invalid choice!\n");
+            default:printf("Invalid choice!\n");
         }
-        }
+    }
         while (choice != 6);
-    
     return 0;
 }
